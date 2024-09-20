@@ -25,6 +25,7 @@ public class SearchViewController: UIViewController {
         view.bounces = false
         view.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
         view.register(FooterView.self, forCellReuseIdentifier: FooterView.identifier)
+        view.delegate = self
         return view
     }()
     
@@ -121,5 +122,15 @@ extension SearchViewController: UITextFieldDelegate {
         guard let text = textField.text?.trim() else { return true }
         searchViewModel.input.findSearch(text: text)
         return true
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let item = dataSources.itemIdentifier(for: indexPath) else { return }
+        if case .bookInfo(let model) = item {
+            let detailVC = DetailViewController(bookInfo: model)
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
     }
 }
