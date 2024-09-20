@@ -14,7 +14,6 @@ let package = Package(
     dependencies: [
         .package(path: "../Core"),
         .package(path: "../Design"),
-        .package(path: "../Data"),
         .package(path: "../Domain"),
     ],
     targets: [
@@ -22,9 +21,9 @@ let package = Package(
             name: "Feature",
             dependencies: [
                 .product(name: "Core", package: "Core"),
-                .product(name: "Design", package: "Design"),
                 .product(name: "Domain", package: "Domain"),
-                .product(name: "Data", package: "Data"),
-            ]),
+                .product(name: "Design", package: "Design"),
+            ]
+        )
     ]
 )
