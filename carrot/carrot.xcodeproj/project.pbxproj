@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		BDD1E2192C9D119D00B3DD43 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E2182C9D119D00B3DD43 /* AppDelegate.swift */; };
-		BDD1E21D2C9D119D00B3DD43 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E21C2C9D119D00B3DD43 /* ViewController.swift */; };
 		BDD1E2222C9D119E00B3DD43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDD1E2212C9D119E00B3DD43 /* Assets.xcassets */; };
 		BDD1E2252C9D119E00B3DD43 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BDD1E2242C9D119E00B3DD43 /* Base */; };
 		BDD1E2302C9D119E00B3DD43 /* carrotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E22F2C9D119E00B3DD43 /* carrotTests.swift */; };
 		BDD1E23A2C9D119F00B3DD43 /* carrotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E2392C9D119F00B3DD43 /* carrotUITests.swift */; };
 		BDD1E23C2C9D119F00B3DD43 /* carrotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E23B2C9D119F00B3DD43 /* carrotUITestsLaunchTests.swift */; };
+		BDD1E24F2C9D33A400B3DD43 /* Core in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E24E2C9D33A400B3DD43 /* Core */; };
+		BDD1E2512C9D33A400B3DD43 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2502C9D33A400B3DD43 /* Data */; };
+		BDD1E2532C9D33A400B3DD43 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2522C9D33A400B3DD43 /* Design */; };
+		BDD1E2552C9D33A400B3DD43 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2542C9D33A400B3DD43 /* Domain */; };
+		BDD1E2572C9D33A400B3DD43 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2562C9D33A400B3DD43 /* Feature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +40,6 @@
 /* Begin PBXFileReference section */
 		BDD1E2152C9D119D00B3DD43 /* carrot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = carrot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDD1E2182C9D119D00B3DD43 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BDD1E21C2C9D119D00B3DD43 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BDD1E2212C9D119E00B3DD43 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BDD1E2242C9D119E00B3DD43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BDD1E2262C9D119E00B3DD43 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -57,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDD1E2532C9D33A400B3DD43 /* Design in Frameworks */,
+				BDD1E2572C9D33A400B3DD43 /* Feature in Frameworks */,
+				BDD1E2512C9D33A400B3DD43 /* Data in Frameworks */,
+				BDD1E2552C9D33A400B3DD43 /* Domain in Frameworks */,
+				BDD1E24F2C9D33A400B3DD43 /* Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +97,7 @@
 				BDD1E22E2C9D119E00B3DD43 /* carrotTests */,
 				BDD1E2382C9D119F00B3DD43 /* carrotUITests */,
 				BDD1E2162C9D119D00B3DD43 /* Products */,
+				BDD1E24D2C9D33A400B3DD43 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -106,7 +115,6 @@
 			isa = PBXGroup;
 			children = (
 				BDD1E2182C9D119D00B3DD43 /* AppDelegate.swift */,
-				BDD1E21C2C9D119D00B3DD43 /* ViewController.swift */,
 				BDD1E2212C9D119E00B3DD43 /* Assets.xcassets */,
 				BDD1E2232C9D119E00B3DD43 /* LaunchScreen.storyboard */,
 				BDD1E2262C9D119E00B3DD43 /* Info.plist */,
@@ -131,6 +139,13 @@
 			path = carrotUITests;
 			sourceTree = "<group>";
 		};
+		BDD1E24D2C9D33A400B3DD43 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -147,6 +162,13 @@
 			dependencies = (
 			);
 			name = carrot;
+			packageProductDependencies = (
+				BDD1E24E2C9D33A400B3DD43 /* Core */,
+				BDD1E2502C9D33A400B3DD43 /* Data */,
+				BDD1E2522C9D33A400B3DD43 /* Design */,
+				BDD1E2542C9D33A400B3DD43 /* Domain */,
+				BDD1E2562C9D33A400B3DD43 /* Feature */,
+			);
 			productName = carrot;
 			productReference = BDD1E2152C9D119D00B3DD43 /* carrot.app */;
 			productType = "com.apple.product-type.application";
@@ -261,7 +283,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDD1E21D2C9D119D00B3DD43 /* ViewController.swift in Sources */,
 				BDD1E2192C9D119D00B3DD43 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -609,6 +630,29 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BDD1E24E2C9D33A400B3DD43 /* Core */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Core;
+		};
+		BDD1E2502C9D33A400B3DD43 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		BDD1E2522C9D33A400B3DD43 /* Design */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Design;
+		};
+		BDD1E2542C9D33A400B3DD43 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		BDD1E2562C9D33A400B3DD43 /* Feature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Feature;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BDD1E20D2C9D119D00B3DD43 /* Project object */;
 }
