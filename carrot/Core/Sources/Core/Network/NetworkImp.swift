@@ -32,7 +32,7 @@ public final class NetworkImp: Network {
                     guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { return }
                     
                     let status = statusCode / 100 == 2 ? "Success" : "Failure"
-                    let dataString = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                    let dataString = data.prettyPrintedJSONString ?? ""
                     let message = """
                     \n\(status) \(urlRequest.httpMethod ?? "") \(request.endpoint) (\(statusCode))
                     DEFAULT: \(defaultHeader))

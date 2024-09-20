@@ -14,11 +14,15 @@ class SearchCell: UITableViewCell {
     
     lazy var titleLbl: UILabel = {
         let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 20)
+        label.numberOfLines = 0
         return label
     }()
     
     lazy var subTitleLbl: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 14, weight: .light)
+        label.numberOfLines = 0
         return label
     }()
     
@@ -29,6 +33,8 @@ class SearchCell: UITableViewCell {
     
     lazy var priceLbl: UILabel = {
         let label = UILabel()
+        label.font = .systemFont(ofSize: 15, weight: .medium)
+        label.numberOfLines = 1
         return label
     }()
     
@@ -37,7 +43,6 @@ class SearchCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setUI()
-        bind()
     }
     
     required init?(coder: NSCoder) {
@@ -60,8 +65,8 @@ class SearchCell: UITableViewCell {
         NSLayoutConstraint.activate([
             iconImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             iconImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            iconImageView.widthAnchor.constraint(equalToConstant: 40),
-            iconImageView.heightAnchor.constraint(equalToConstant: 40),
+            iconImageView.widthAnchor.constraint(equalToConstant: 100),
+            iconImageView.heightAnchor.constraint(equalToConstant: 100),
             
             textStackView.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 16),
             textStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -69,10 +74,6 @@ class SearchCell: UITableViewCell {
             textStackView.topAnchor.constraint(greaterThanOrEqualTo: contentView.topAnchor, constant: 10),
             textStackView.bottomAnchor.constraint(lessThanOrEqualTo: contentView.bottomAnchor, constant: -10)
         ])
-    }
-    
-    private func bind() {
-        
     }
 }
 
