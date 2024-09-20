@@ -7,21 +7,21 @@
 
 import Foundation
 
-class Container {
+public class Container {
     private var services: [String: Any] = [:]
     
-    static let shared = Container()
+    public static let shared = Container()
     
-    private init() {}
+    public init() {}
     
     // 객체를 등록하는 함수
-    func register<ServiceType>(type: ServiceType.Type, factory: @escaping () -> ServiceType) {
+    public func register<ServiceType>(type: ServiceType.Type, factory: @escaping () -> ServiceType) {
         let key = String(describing: type)
         services[key] = factory
     }
     
     // 객체를 가져오는 함수
-    func resolve<ServiceType>(type: ServiceType.Type) -> ServiceType? {
+    public func resolve<ServiceType>(type: ServiceType.Type) -> ServiceType? {
         let key = String(describing: type)
         if let factory = services[key] as? () -> ServiceType {
             return factory()

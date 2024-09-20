@@ -5,7 +5,11 @@
 //  Created by 최승민 on 9/20/24.
 //
 
+import Core
+import Design
+
 import UIKit
+import Combine
 
 public class SearchViewController: UIViewController {
     var isEditMode: Bool {
@@ -18,11 +22,15 @@ public class SearchViewController: UIViewController {
     lazy var tableView: UITableView = {
         let view = UITableView()
         view.keyboardDismissMode = .onDrag
+        view.bounces = false
         view.register(SearchCell.self, forCellReuseIdentifier: SearchCell.identifier)
+        view.register(FooterView.self, forCellReuseIdentifier: FooterView.identifier)
         return view
     }()
     
     private var dataSources: SearchDataSource!
+    var searchViewModel: SearchViewModelType = SearchViewModel()
+    var cancellables: Set<AnyCancellable> = .init()
     
     public init() {
         super.init(nibName: nil, bundle: nil)
@@ -37,56 +45,38 @@ public class SearchViewController: UIViewController {
         view.backgroundColor = .white
         title = "검색"
         
+        bind()
         setTableView()
         setupSearchController()
+    }
+    
+    func bind() {
+        searchViewModel.output.bookList
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] bookList in
+                guard  let self else { return }
+                if bookList.isEmpty {
+                    
+                } else {
+                    let snapshot = self.searchViewModel.output.makeSnapshot()
+                    self.setSnapshot(snapshot)
+                }
+            }
+            .store(in: &cancellables)
         
-        var snapshot = SearchSnapshot()
-        snapshot.appendSections([.book])
-        snapshot.appendItems(
-            [
-                .bookInfo(
-                    model: .init(
-                        imageURL: "",
-                        title: "title 입니다.",
-                        subTitle: "subTitle 입니다.",
-                        price: "$32.0"
-                    )
-                ),
-                .bookInfo(
-                    model: .init(
-                        imageURL: "",
-                        title: "title 입니다.2",
-                        subTitle: "subTitle 입니다.",
-                        price: "$32.0"
-                    )
-                ),
-                .bookInfo(
-                    model: .init(
-                        imageURL: "",
-                        title: "title 입니다.3",
-                        subTitle: "subTitle 입니다.",
-                        price: "$32.0"
-                    )
-                ),
-                .bookInfo(
-                    model: .init(
-                        imageURL: "",
-                        title: "title 입니다.4",
-                        subTitle: "subTitle 입니다.",
-                        price: "$32.0"
-                    )
-                )
-            ]
-        )
-        
-        setSnapshot(snapshot)
+        searchViewModel.output.error
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errorString in
+                self?.alert(message: errorString)
+            }
+            .store(in: &cancellables)
     }
     
     private func setTableView() {
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         dataSources = dataSource(tableView: tableView)
@@ -96,8 +86,8 @@ public class SearchViewController: UIViewController {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "검색"
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.searchTextField.delegate = self
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -111,7 +101,11 @@ public class SearchViewController: UIViewController {
                 cell?.titleLbl.text = model.title
                 cell?.subTitleLbl.text = model.subTitle
                 cell?.priceLbl.text = model.price
-                cell?.iconImageView.image = UIImage(systemName: "heart.fill")
+                cell?.iconImageView.loadImage(from: model.imageURL)
+                return cell
+            case .footer:
+                let cell = tableView.dequeueReusableCell(withIdentifier: FooterView.identifier, for: indexPath) as? FooterView
+                cell?.progressView.startAnimating()
                 return cell
             }
         }
@@ -122,10 +116,10 @@ public class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating {
-    public func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else { return }
-        print(text)
-        tableView.reloadData()
+extension SearchViewController: UITextFieldDelegate {
+    public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let text = textField.text?.trim() else { return true }
+        searchViewModel.input.findSearch(text: text)
+        return true
     }
 }

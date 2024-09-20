@@ -6,13 +6,19 @@
 //
 
 import UIKit
+
 import Feature
+import Core
+import Data
+import Domain
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        configureContainer()
         
         window = UIWindow()
         let nav = UINavigationController(rootViewController: SearchViewController())
@@ -23,3 +29,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 }
 
+extension AppDelegate {
+    @discardableResult
+    func configureContainer() -> Container {
+        let container = Container.shared
+        registerServices(container: container)
+        return container
+    }
+    
+    func registerServices(container: Container) {
+        let network = NetworkImp(session: URLSession.shared)
+        
+        let searchRepository = SearchRepositoryImp(baseURL: Constant.baseURL, network: network)
+        container.register(type: SearchRepository.self) {
+            searchRepository
+        }
+    }
+}
