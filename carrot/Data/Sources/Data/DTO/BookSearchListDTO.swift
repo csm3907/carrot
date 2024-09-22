@@ -9,17 +9,17 @@ import Foundation
 
 import Domain
 
-struct BookSearchListDTO: Codable {
+public struct BookSearchListDTO: Codable {
     let total, page: String?
     let books: [BookDTO]
     
-    struct BookDTO: Codable {
+    public struct BookDTO: Codable {
         let title, subtitle, isbn13, price: String?
         let image: String?
         let url: String?
     }
     
-    func toDomain() -> [Book] {
+    public func toDomain() -> [Book] {
         return books.map {
             Book.init(
                 imageURL: $0.image ?? "",
