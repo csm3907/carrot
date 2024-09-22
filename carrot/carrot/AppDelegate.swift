@@ -44,5 +44,9 @@ extension AppDelegate {
         container.register(type: SearchRepository.self) {
             searchRepository
         }
+        let detailRepository = BookDetailRepositoryImp(baseURL: Constant.baseURL, network: network)
+        container.register(type: BookDetailRepository.self) {
+            detailRepository
+        }
     }
 }

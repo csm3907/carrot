@@ -12,9 +12,10 @@ struct SearchPresentationModel: Hashable {
     var title: String
     var subTitle: String
     var price: String
+    var id: String
     
     static func == (lhs: SearchPresentationModel, rhs: SearchPresentationModel) -> Bool {
-        if lhs.imageURL == rhs.imageURL && lhs.title == rhs.title && lhs.subTitle == rhs.subTitle && lhs.price == rhs.price {
+        if lhs.imageURL == rhs.imageURL && lhs.title == rhs.title && lhs.subTitle == rhs.subTitle && lhs.price == rhs.price && lhs.id == rhs.id {
             return true
         }
         
@@ -26,5 +27,6 @@ struct SearchPresentationModel: Hashable {
         hasher.combine(title)
         hasher.combine(subTitle)
         hasher.combine(price)
+        hasher.combine(id)
     }
 }

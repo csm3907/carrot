@@ -56,7 +56,8 @@ class SearchViewModel: SearchViewModelInput, SearchViewModelOutput, SearchViewMo
                         imageURL: $0.imageURL,
                         title: $0.title,
                         subTitle: $0.subTitle,
-                        price: $0.price
+                        price: $0.price,
+                        id: $0.id
                     )
                 })
             }
