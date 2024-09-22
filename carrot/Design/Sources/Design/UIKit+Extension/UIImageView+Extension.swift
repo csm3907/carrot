@@ -8,7 +8,13 @@
 import UIKit
 
 public extension UIImageView {
+    
     func loadImage(from url: URL) {
+        if let cachedImage = CacheManager.shared.loadImage(from: url) {
+            self.image = cachedImage
+            return
+        }
+        
         DispatchQueue.global().async { [weak self] in
             URLSession.shared.dataTask(with: url) { data, response, error in
                 guard
@@ -16,7 +22,10 @@ public extension UIImageView {
                     let data = data, error == nil,
                     let image = UIImage(data: data)
                     else { return }
-                DispatchQueue.main.async() { [weak self] in
+                
+                CacheManager.shared.saveImage(image, for: url)
+                
+                DispatchQueue.main.async { [weak self] in
                     guard let self = self else { return }
                     self.image = image
                 }
