@@ -34,7 +34,7 @@ class DetailHeaderCell: UITableViewCell {
     lazy var authorLbl: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 15, weight: .medium)
-        label.numberOfLines = 1
+        label.numberOfLines = 0
         return label
     }()
     

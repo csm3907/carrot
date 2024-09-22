@@ -129,7 +129,7 @@ extension SearchViewController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let item = dataSources.itemIdentifier(for: indexPath) else { return }
         if case .bookInfo(let model) = item {
-            let detailVC = DetailViewController(bookInfo: model)
+            let detailVC = DetailViewController(bookID: model.id)
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }

@@ -23,9 +23,12 @@ class DetailViewController: UIViewController {
         return view
     }()
     
+    private let viewModel: DetailViewModelType = DetailViewModel()
     private var dataSources: DetailDataSource!
     var cancellables: Set<AnyCancellable> = .init()
-    init(bookInfo: SearchPresentationModel) {
+    let bookID: String
+    init(bookID: String) {
+        self.bookID = bookID
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -40,41 +43,60 @@ class DetailViewController: UIViewController {
         view.backgroundColor = .white
         
         setTableView()
+        bind()
+        viewModel.input.searchDetail(id: bookID)
+//        var snapshot = DetailSnapshot()
+//        snapshot.appendSections([.book])
+//        snapshot.appendItems(
+//            [
+//                .bookHeader(
+//                    model: .init(
+//                        title: "Securing DevOps",
+//                        subtitle: "Security in the Cloud",
+//                        authors: "Julien Vehent",
+//                        publisher: "Manning",
+//                        image: "https://itbook.store/img/books/9781617294136.png"
+//                    )
+//                ),
+//                .bookInfo(
+//                    model: .init(
+//                        year: "2018",
+//                        rating: "5",
+//                        desc: "An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps team's highest priority is understanding those risks and hardening the system against them.Securing DevOps teaches you the essential techniques to secure your cloud ...",
+//                        price: "$26.98",
+//                        url: "https://itbook.store/books/9781617294136",
+//                        pages: "384"
+//                    )
+//                ),
+//                .bookPDF(
+//                    model: .init(
+//                        pdf: [
+//                            "Chapter 2": "https://itbook.store/files/9781617294136/chapter2.pdf",
+//                            "Chapter 5": "https://itbook.store/files/9781617294136/chapter5.pdf"
+//                        ]
+//                    )
+//                )
+//            ]
+//        )
+//        setSnapshot(snapshot)
+    }
+    
+    func bind() {
+        viewModel.output.bookDetail
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] bookDetail in
+                guard  let self else { return }
+                let snapshot = self.viewModel.output.makeSnapshot()
+                self.setSnapshot(snapshot)
+            }
+            .store(in: &cancellables)
         
-        var snapshot = DetailSnapshot()
-        snapshot.appendSections([.book])
-        snapshot.appendItems(
-            [
-                .bookHeader(
-                    model: .init(
-                        title: "Securing DevOps",
-                        subtitle: "Security in the Cloud",
-                        authors: "Julien Vehent",
-                        publisher: "Manning",
-                        image: "https://itbook.store/img/books/9781617294136.png"
-                    )
-                ),
-                .bookInfo(
-                    model: .init(
-                        year: "2018",
-                        rating: "5",
-                        desc: "An application running in the cloud can benefit from incredible efficiencies, but they come with unique security threats too. A DevOps team's highest priority is understanding those risks and hardening the system against them.Securing DevOps teaches you the essential techniques to secure your cloud ...",
-                        price: "$26.98",
-                        url: "https://itbook.store/books/9781617294136",
-                        pages: "384"
-                    )
-                ),
-                .bookPDF(
-                    model: .init(
-                        pdf: [
-                            "Chapter 2": "https://itbook.store/files/9781617294136/chapter2.pdf",
-                            "Chapter 5": "https://itbook.store/files/9781617294136/chapter5.pdf"
-                        ]
-                    )
-                )
-            ]
-        )
-        setSnapshot(snapshot)
+        viewModel.output.error
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] errorString in
+                self?.alert(message: errorString)
+            }
+            .store(in: &cancellables)
     }
     
     private func setTableView() {

@@ -24,7 +24,8 @@ struct BookDTO: Codable {
             imageURL: image ?? "",
             title: title ?? "",
             subTitle: subtitle ?? "",
-            price: price ?? ""
+            price: price ?? "",
+            id: isbn13 ?? ""
         )
     }
 }
