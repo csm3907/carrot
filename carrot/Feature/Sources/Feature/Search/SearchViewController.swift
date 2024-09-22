@@ -107,6 +107,7 @@ public class SearchViewController: UIViewController {
             case .footer:
                 let cell = tableView.dequeueReusableCell(withIdentifier: FooterView.identifier, for: indexPath) as? FooterView
                 cell?.progressView.startAnimating()
+                self.searchViewModel.input.findMore()
                 return cell
             }
         }

@@ -24,7 +24,7 @@ public extension SearchRepositoryImp {
     func searchBookInfo(page: Int, search: String) -> AnyPublisher<[Book], Error> {
         let request = SearchRequest(baseURL, pages: page, search: search)
         return send(request)
-            .map { $0.output.books.map { $0.toDomain() } }
+            .map { $0.output.toDomain() }
             .eraseToAnyPublisher()
     }
 }
