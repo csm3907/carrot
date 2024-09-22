@@ -22,7 +22,11 @@ struct SearchRequest: Request {
         if pages != 0 {
             path = path + "/\(pages)"
         }
-        endpoint = url.appendingPathComponent(path)
+        if let encodedQuery = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
+            endpoint = url.appendingPathComponent(encodedQuery)
+        } else {
+            endpoint = url.appendingPathComponent(path)
+        }
         method = .get
         header = [:]
         query = [:]
