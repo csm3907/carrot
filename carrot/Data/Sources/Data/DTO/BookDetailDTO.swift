@@ -9,7 +9,7 @@ import Foundation
 
 import Domain
 
-struct BookDetailDTO: Codable {
+public struct BookDetailDTO: Codable {
     let error, title, subtitle, authors: String?
     let publisher, isbn10, isbn13, pages: String?
     let year, rating, desc, price: String?
@@ -17,7 +17,7 @@ struct BookDetailDTO: Codable {
     let url: String?
     let pdf: [String: String]?
     
-    func toDomain() -> BookDetail {
+    public func toDomain() -> BookDetail {
         return .init(
             imageURL: image ?? "",
             title: title ?? "",

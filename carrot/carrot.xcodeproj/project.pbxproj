@@ -18,6 +18,9 @@
 		BDD1E2532C9D33A400B3DD43 /* Design in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2522C9D33A400B3DD43 /* Design */; };
 		BDD1E2552C9D33A400B3DD43 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2542C9D33A400B3DD43 /* Domain */; };
 		BDD1E2572C9D33A400B3DD43 /* Feature in Frameworks */ = {isa = PBXBuildFile; productRef = BDD1E2562C9D33A400B3DD43 /* Feature */; };
+		BDD1E25A2CA0230500B3DD43 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E2592CA0230500B3DD43 /* MockData.swift */; };
+		BDD1E25D2CA0234C00B3DD43 /* SearchRepositoryMockImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E25C2CA0234C00B3DD43 /* SearchRepositoryMockImp.swift */; };
+		BDD1E25F2CA0265000B3DD43 /* DetailRepositoryMockImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD1E25E2CA0265000B3DD43 /* DetailRepositoryMockImp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,9 @@
 		BDD1E24A2C9D120000B3DD43 /* Feature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Feature; sourceTree = "<group>"; };
 		BDD1E24B2C9D121E00B3DD43 /* Design */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Design; sourceTree = "<group>"; };
 		BDD1E24C2C9D124300B3DD43 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+		BDD1E2592CA0230500B3DD43 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		BDD1E25C2CA0234C00B3DD43 /* SearchRepositoryMockImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRepositoryMockImp.swift; sourceTree = "<group>"; };
+		BDD1E25E2CA0265000B3DD43 /* DetailRepositoryMockImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRepositoryMockImp.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +131,8 @@
 		BDD1E22E2C9D119E00B3DD43 /* carrotTests */ = {
 			isa = PBXGroup;
 			children = (
+				BDD1E25B2CA0233900B3DD43 /* Repository */,
+				BDD1E2582CA022FA00B3DD43 /* MockData */,
 				BDD1E22F2C9D119E00B3DD43 /* carrotTests.swift */,
 			);
 			path = carrotTests;
@@ -144,6 +152,23 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BDD1E2582CA022FA00B3DD43 /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				BDD1E2592CA0230500B3DD43 /* MockData.swift */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		BDD1E25B2CA0233900B3DD43 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				BDD1E25C2CA0234C00B3DD43 /* SearchRepositoryMockImp.swift */,
+				BDD1E25E2CA0265000B3DD43 /* DetailRepositoryMockImp.swift */,
+			);
+			path = Repository;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +317,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDD1E2302C9D119E00B3DD43 /* carrotTests.swift in Sources */,
+				BDD1E25D2CA0234C00B3DD43 /* SearchRepositoryMockImp.swift in Sources */,
+				BDD1E25A2CA0230500B3DD43 /* MockData.swift in Sources */,
+				BDD1E25F2CA0265000B3DD43 /* DetailRepositoryMockImp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
