@@ -35,11 +35,9 @@ public class FooterView: UITableViewCell {
         contentView.addSubview(progressView)
         
         NSLayoutConstraint.activate([
-            progressView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
-            progressView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor),
+            progressView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 20),
+            progressView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             progressView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            progressView.widthAnchor.constraint(equalToConstant: 50),
-            progressView.heightAnchor.constraint(equalToConstant: 50),
         ])
         progressView.startAnimating()
     }

@@ -12,13 +12,6 @@ import UIKit
 import Combine
 
 public class SearchViewController: UIViewController {
-    var isEditMode: Bool {
-        let searchController = navigationItem.searchController
-        let isActive = searchController?.isActive ?? false
-        let isSearchBarHasText = searchController?.searchBar.text?.isEmpty == false
-        return isActive && isSearchBarHasText
-    }
-    
     lazy var tableView: UITableView = {
         let view = UITableView()
         view.keyboardDismissMode = .onDrag
@@ -53,11 +46,12 @@ public class SearchViewController: UIViewController {
     
     func bind() {
         searchViewModel.output.bookList
+            .dropFirst()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] bookList in
                 guard  let self else { return }
                 if bookList.isEmpty {
-                    
+                    self.alert(title: "검색결과 없음", message: "검색하신 검색어의 결과가 없습니다. 다시 입력해주세요.")
                 } else {
                     let snapshot = self.searchViewModel.output.makeSnapshot()
                     self.setSnapshot(snapshot)

@@ -31,7 +31,7 @@ public extension SearchUseCase {
         return searchRepository.searchBookInfo(page: page, search: search)
             .handleEvents(receiveOutput: { [weak self] bookList in
                 guard let self else { return }
-                self.page += bookList.count + 1
+                self.page += bookList.count
                 self.total = Int(bookList.first?.total ?? "0") ?? 0
             })
             .eraseToAnyPublisher()
